@@ -1,4 +1,29 @@
 <resources>
-    <string name="app_name">RentalZ-kotlin</string>
+    <string name="app_name">RentalZ</string>
+
+    <string name="hint_property_type">Property Type</string>
+    <string name="hint_bedroom_type">Bedroom Type</string>
+    <string name="hint_time">Time of creation</string>
+    <string name="hint_price">Rental price</string>
+    <string name="hint_furniture_type">Furniture Type</string>
+    <string name="hint_reporter_name">Reporter Name</string>
+    <string name="hint_notes">Additional Notes</string>
+    <string name="hint_address">Property\'s Address</string>
+    <string name="hint_submit">submit</string>
+    <string name="btn_text_clear">clear</string>
+    <string name="btn_text_add">add</string>
+    <string name="text_all_rentals">All rentals</string>
+    <string name="per_month_text">/month</string>
+    <string name="cleared_message">The database is completely wiped</string>
+    <string name="hint_add_property">Add property</string>
     <string name="hint_navigation_header">Navigation Header Image</string>
+    <string name="hint_back">back</string>
+    <string name="hint_confirm">Please confirm the property</string>
+    <string name="hint_next">Next</string>
+    <string name="hint_modify">Modify</string>
+    <string name="hint_edit">save</string>
+    <string name="hint_delete">delete</string>
+
+    <string name="hint_map">map</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

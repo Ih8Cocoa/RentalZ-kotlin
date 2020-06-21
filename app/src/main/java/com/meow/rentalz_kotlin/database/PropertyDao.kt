@@ -1,5 +1,6 @@
 package com.meow.rentalz_kotlin.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -18,7 +19,7 @@ interface PropertyDao {
     suspend fun deleteAll()
 
     @Query("select *, rowid from property_table order by rowid desc")
-    fun allProperties(): Flow<Property>
+    fun allProperties(): LiveData<List<Property>>
 
     @Query("select *, rowid from property_table where rowid = :id")
     suspend fun findPropertyById(id: Long): Property

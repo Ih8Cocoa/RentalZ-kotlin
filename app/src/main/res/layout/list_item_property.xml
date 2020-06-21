@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <!-- Store the item and the callback to execute on click -->
+        <variable
+            name="item"
+            type="com.meow.rentalz_kotlin.database.Property" />
+        <variable
+            name="callback"
+            type="com.meow.rentalz_kotlin.fragments.rentallist.PropertyItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/title_text"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{item.propertyType + ` for sale`}"
+            app:layout_constraintBottom_toTopOf="@+id/subtitle_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Catgirls for sale" />
+
+        <TextView
+            android:id="@+id/subtitle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{`Bedroom type: ` + item.bedroomType}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_text"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            tools:text="Bedroom Type: Very Large" />
+
+        <TextView
+            android:id="@+id/price_text"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:text="@{`$` + item.monthlyPrice.toPlainString()}"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/subtitle_text"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/title_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="$399" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/per_month_text"
+            app:layout_constraintBottom_toBottomOf="@+id/price_text"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -21,7 +21,7 @@ data class Property(
     val bedroomType: String = "",
     val creationDate: LocalDate? = null,
     val address: String = "",
-    val monthlyPriceUsd: BigDecimal = BigDecimal.ZERO,
+    val monthlyPrice: BigDecimal = BigDecimal.ZERO,
     val furnitureType: String = "",
     val notes: String = "",
     val reporterName: String = ""

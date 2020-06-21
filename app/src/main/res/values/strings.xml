@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RentalZ-kotlin</string>
+    <string name="hint_navigation_header">Navigation Header Image</string>
+</resources>

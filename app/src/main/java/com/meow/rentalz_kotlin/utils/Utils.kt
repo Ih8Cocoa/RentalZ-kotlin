@@ -1,6 +1,8 @@
 package com.meow.rentalz_kotlin.utils
 
+import android.app.Activity
 import android.location.Geocoder
+import android.view.inputmethod.InputMethodManager
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,5 +33,18 @@ object Utils {
     fun convertToFullString(date: LocalDate?): String {
         if (date == null) return ""
         return date.format(FULL_FORMATTER)
+    }
+
+    @JvmStatic
+    fun hasNoErrors(arr: BooleanArray) = arr.all { true }
+
+    @JvmStatic
+    fun Activity?.hideSoftKeyboard() {
+        if (this == null) return
+
+        val imm = getSystemService(InputMethodManager::class.java)
+        if (imm != null && currentFocus != null) {
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }
     }
 }

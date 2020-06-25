@@ -10,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.*
 
 import com.google.android.gms.maps.model.MarkerOptions
-import com.meow.rentalz_kotlin.RentalMapFragmentArgs
 import com.meow.rentalz_kotlin.databinding.FragmentRentalMapBinding
 
 class RentalMapFragment : Fragment() {

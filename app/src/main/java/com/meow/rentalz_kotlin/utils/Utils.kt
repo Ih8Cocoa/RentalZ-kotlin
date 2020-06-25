@@ -9,6 +9,7 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.time.format.FormatStyle
 
 object Utils {
@@ -45,6 +46,35 @@ object Utils {
         val imm = getSystemService(InputMethodManager::class.java)
         if (imm != null && currentFocus != null) {
             imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }
+    }
+
+    fun validateString(str: String): ErrorType {
+        val isEmpty = str.trim().isEmpty()
+        return if (isEmpty) ErrorType.ILLEGAL_DATA else ErrorType.NONE
+    }
+
+    fun validatePrice(str: String): ErrorType {
+        val d = str.toDoubleOrNull()
+        return when {
+            d == null -> {
+                ErrorType.INVALID_FORMAT
+            }
+            d > 0 -> {
+                ErrorType.NONE
+            }
+            else -> {
+                ErrorType.ILLEGAL_DATA
+            }
+        }
+    }
+
+    fun validateDate(str: String): ErrorType {
+        return try {
+            LocalDate.parse(str, Utils.DATE_TIME_FORMATTER)
+            ErrorType.NONE
+        } catch (e: DateTimeParseException) {
+            ErrorType.INVALID_FORMAT
         }
     }
 }

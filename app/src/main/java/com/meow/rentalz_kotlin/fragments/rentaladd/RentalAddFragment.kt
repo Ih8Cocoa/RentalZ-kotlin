@@ -31,9 +31,7 @@ class RentalAddFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentRentalAddBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_rental_add, container, false
-        )
+        val binding = FragmentRentalAddBinding.inflate(inflater, container, false)
         binding.editDate.setOnFocusChangeListener(this::datePickerFocusChangeListener)
 
         binding.viewModel = viewModel

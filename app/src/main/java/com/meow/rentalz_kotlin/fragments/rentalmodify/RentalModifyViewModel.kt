@@ -1,24 +1,27 @@
-package com.meow.rentalz_kotlin.fragments.rentaladd
+package com.meow.rentalz_kotlin.fragments.rentalmodify
 
 import androidx.lifecycle.*
 import com.meow.rentalz_kotlin.database.Property
+import com.meow.rentalz_kotlin.database.PropertyDao
 import com.meow.rentalz_kotlin.utils.ErrorType
 import com.meow.rentalz_kotlin.utils.Utils
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.time.LocalDate
-import java.time.format.DateTimeParseException
 
-class RentalAddViewModel : ViewModel() {
-    val propertyType = MutableLiveData("")
-    val bedroomType = MutableLiveData("")
-    val furnitureType = MutableLiveData("")
-    val notes = MutableLiveData("")
-    val reporterName = MutableLiveData("")
-    val address = MutableLiveData("")
-    val monthlyPrice = MutableLiveData("")
-    val creationDate = MutableLiveData("")
+class RentalModifyViewModel(private val dao: PropertyDao, property: Property) : ViewModel() {
+    val id = property.id
+    val propertyType = MutableLiveData(property.propertyType)
+    val bedroomType = MutableLiveData(property.bedroomType)
+    val monthlyPrice = MutableLiveData(property.monthlyPrice.toPlainString())
+    val furnitureType = MutableLiveData(property.furnitureType)
+    val notes = MutableLiveData(property.notes)
+    val reporterName = MutableLiveData(property.reporterName)
+    val address = MutableLiveData(property.address)
+    val creationDate = MutableLiveData(
+        property.creationDate?.format(Utils.DATE_TIME_FORMATTER) ?: ""
+    )
 
-    // Error reporting
+    // Validation LiveData
     val propertyTypeValid: LiveData<ErrorType> = propertyType.map(Utils::validateString)
     val bedroomTypeValid: LiveData<ErrorType> = bedroomType.map(Utils::validateString)
     val reporterNameValid: LiveData<ErrorType> = reporterName.map(Utils::validateString)
@@ -28,39 +31,51 @@ class RentalAddViewModel : ViewModel() {
     private val _validationStatuses = MediatorLiveData<BooleanArray>()
     private val _buttonState = MutableLiveData<ButtonState>()
 
-    // getters
+    // abstracted getters
     val validationStatuses: LiveData<BooleanArray>
         get() = _validationStatuses
     val buttonState: LiveData<ButtonState>
         get() = _buttonState
-    val property: Property
-        get() = Property(
+
+    init {
+        _validationStatuses.value = BooleanArray(5)
+        _validationStatuses.addSource(propertyTypeValid, updateValidationStatusLambdaFor(0))
+        _validationStatuses.addSource(bedroomTypeValid, updateValidationStatusLambdaFor(1))
+        _validationStatuses.addSource(monthlyPriceValid, updateValidationStatusLambdaFor(2))
+        _validationStatuses.addSource(creationDateValid, updateValidationStatusLambdaFor(3))
+        _validationStatuses.addSource(reporterNameValid, updateValidationStatusLambdaFor(4))
+    }
+
+    // click listeners
+    fun onEditButtonClicked() {
+        val p = Property(
             propertyType, bedroomType, creationDate, address,
             monthlyPrice, furnitureType, notes, reporterName
         )
-
-    init {
-        // Decide whether or not the submit button is available
-        // requires a set to mark the invalid values
-        val initialValidationStatuses = BooleanArray(5)
-        _validationStatuses.value = initialValidationStatuses
-        _validationStatuses.addSource(propertyTypeValid, updateValidationStatusLambdaFor(0))
-        _validationStatuses.addSource(bedroomTypeValid, updateValidationStatusLambdaFor(1))
-        _validationStatuses.addSource(reporterNameValid, updateValidationStatusLambdaFor(2))
-        _validationStatuses.addSource(monthlyPriceValid, updateValidationStatusLambdaFor(0))
-        _validationStatuses.addSource(creationDateValid, updateValidationStatusLambdaFor(0))
+        p.id = id
+        viewModelScope.launch {
+            dao.update(p)
+            _buttonState.postValue(ButtonState.EDIT)
+        }
     }
 
-    fun onNextButtonClicked() {
-        _buttonState.value = ButtonState.NEXT
+    fun onDeleteButtonClicked() {
+        _buttonState.value = ButtonState.DELETE_BUTTON_CLICKED
     }
 
-    fun onCancelButtonClicked() {
-        _buttonState.value = ButtonState.CANCEL
+    fun onBackButtonClicked() {
+        _buttonState.value = ButtonState.BACK
     }
 
     fun resetButtonState() {
         _buttonState.value = null
+    }
+
+    fun onDeletionConfirmed() {
+        viewModelScope.launch {
+            dao.deletePropertyById(id)
+            _buttonState.postValue(ButtonState.DELETION_COMPLETED)
+        }
     }
 
     private fun updateValidationStatusLambdaFor(position: Int): (ErrorType) -> Unit {

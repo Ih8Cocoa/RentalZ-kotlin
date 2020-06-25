@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.meow.rentalz_kotlin.R
@@ -31,9 +32,7 @@ class RentalListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentRentalListBinding = FragmentRentalListBinding.inflate(
-            inflater, container, false
-        )
+        val binding = FragmentRentalListBinding.inflate(inflater, container, false)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -72,7 +71,8 @@ class RentalListFragment : Fragment() {
         if (state == null) return
         when (state) {
             ViewModelState.ADD -> {
-
+                val toAddFragment = RentalListFragmentDirections.actionRentalListFragmentToRentalAddFragment()
+                findNavController().navigate(toAddFragment)
             }
             ViewModelState.CLEAR_BUTTON_PRESSED -> {
                 val activity = requireActivity()

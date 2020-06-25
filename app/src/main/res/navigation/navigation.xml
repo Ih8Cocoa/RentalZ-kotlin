@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/rentalListFragment">
 
+    <fragment
+        android:id="@+id/rentalListFragment"
+        android:name="com.meow.rentalz_kotlin.fragments.rentallist.RentalListFragment"
+        android:label="RentalListFragment"
+        tools:layout="@layout/fragment_rental_list">
+
+        <action
+            android:id="@+id/action_rentalListFragment_to_rentalAddFragment"
+            app:destination="@id/rentalAddFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_rentalListFragment_to_rentalDetailsFragment"
+            app:destination="@id/rentalDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/rentalAddFragment"
+        android:name="com.meow.rentalz_kotlin.fragments.rentaladd.RentalAddFragment"
+        android:label="RentalAddFragment"
+        tools:layout="@layout/fragment_rental_add"/>
+    <fragment
+        android:id="@+id/rentalDetailsFragment"
+        android:name="com.meow.rentalz_kotlin.fragments.rentaldetails.RentalDetailsFragment"
+        android:label="RentalDetailsFragment"
+        tools:layout="@layout/fragment_rental_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_rentalDetailsFragment_to_rentalModifyFragment"
+            app:destination="@id/rentalModifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rentalModifyFragment"
+        android:name="com.meow.rentalz_kotlin.fragments.rentalmodify.RentalModifyFragment"
+        android:label="RentalModifyFragment"
+        tools:layout="@layout/fragment_rental_modify">
+        <argument
+            android:name="property"
+            app:argType="com.meow.rentalz_kotlin.database.Property" />
+        <action
+            android:id="@+id/action_rentalModifyFragment_to_rentalListFragment"
+            app:destination="@id/rentalListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation" />
+    </fragment>
 </navigation>

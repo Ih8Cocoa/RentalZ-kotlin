@@ -32,9 +32,7 @@ class RentalDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentRentalDetailsBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_rental_details, container, false
-        )
+        val binding = FragmentRentalDetailsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         attachObserversToViewModel()
@@ -77,7 +75,9 @@ class RentalDetailsFragment : Fragment() {
 
     private fun handleModifyButtonCase() {
         val currentProperty = requireNotNull(viewModel.currentProperty.value)
-
+        val toModifyFragment = RentalDetailsFragmentDirections
+            .actionRentalDetailsFragmentToRentalModifyFragment(currentProperty)
+        findNavController().navigate(toModifyFragment)
     }
 
 }

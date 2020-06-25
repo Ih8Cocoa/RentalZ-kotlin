@@ -49,13 +49,16 @@ class RentalAddFragment : Fragment() {
         when (state) {
             ButtonState.NEXT -> {
                 val property = viewModel.property
-
+                val toConfirmFragment = RentalAddFragmentDirections
+                    .actionRentalAddFragmentToRentalConfirmFragment2(property)
+                findNavController().navigate(toConfirmFragment)
             }
             ButtonState.CANCEL -> findNavController().navigateUp()
         }
         viewModel.resetButtonState()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun datePickerFocusChangeListener(view: View, hasFocus: Boolean) {
         if (!hasFocus) return
         val context = requireContext()
@@ -64,6 +67,7 @@ class RentalAddFragment : Fragment() {
             .show()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun datePickerListener(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
         val date = LocalDate.of(year, month + 1, dayOfMonth).format(Utils.DATE_TIME_FORMATTER)
         viewModel.creationDate.value = date

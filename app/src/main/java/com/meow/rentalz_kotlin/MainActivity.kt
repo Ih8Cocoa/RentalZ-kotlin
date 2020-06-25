@@ -22,9 +22,11 @@ class MainActivity : AppCompatActivity() {
             this, R.layout.activity_main
         )
         drawerLayout = binding.drawerLayout
-        val navController = findNavController(R.id.nav_host_fragment)
-        setupActionBarWithNavController(navController, drawerLayout)
-        binding.navView.setupWithNavController(navController)
+        binding.navView.post {
+            val navController = findNavController(R.id.nav_host_fragment)
+            setupActionBarWithNavController(navController, drawerLayout)
+            binding.navView.setupWithNavController(navController)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -1,3 +1,2 @@
-include ':places-maps-sdk-3.1.0-beta'
 include ':app'
 rootProject.name = "RentalZ-kotlin"

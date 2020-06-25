@@ -65,6 +65,11 @@ class RentalListFragment : Fragment() {
         if (id == null || id < 1) {
             return
         }
+
+        val toDetailsFragment = RentalListFragmentDirections
+            .actionRentalListFragmentToRentalDetailsFragment(id)
+        findNavController().navigate(toDetailsFragment)
+        viewModel.doneNavigatingToPropertyDetails()
     }
 
     private fun buttonObserver(state: ViewModelState?) {

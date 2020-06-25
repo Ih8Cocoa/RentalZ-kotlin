@@ -49,6 +49,7 @@ class RentalDetailsFragment : Fragment() {
             ViewModelState.MAP -> handleMapButtonCase()
             ViewModelState.MODIFY -> handleModifyButtonCase()
         }
+        viewModel.resetButtonState()
     }
 
     private fun geocodeErrorObserver(error: GeocodeErrorTypes?) {
@@ -68,7 +69,9 @@ class RentalDetailsFragment : Fragment() {
 
     private fun handleMapButtonCase() {
         val coordinates = requireNotNull(viewModel.coordinates.value)
-
+        val toMapFragment = RentalDetailsFragmentDirections
+            .actionRentalDetailsFragmentToRentalMapFragment(coordinates)
+        findNavController().navigate(toMapFragment)
     }
 
     private fun handleModifyButtonCase() {

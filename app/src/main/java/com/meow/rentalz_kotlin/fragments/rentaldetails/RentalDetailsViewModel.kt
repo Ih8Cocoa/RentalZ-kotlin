@@ -12,21 +12,17 @@ import java.io.IOException
 
 class RentalDetailsViewModel(propertyId: Long, dao: PropertyDao, private val geocoder: Geocoder) :
     ViewModel() {
-    private val _currentProperty: LiveData<Property> = liveData {
-        dao.findPropertyById(propertyId)
-    }
-    private val _coordinates = _currentProperty.switchMap(::getEventualCoordinates)
+    val currentProperty: LiveData<Property> = dao.findPropertyById(propertyId)
+    
+    val coordinates = currentProperty.switchMap(::getEventualCoordinates)
 
     private val _viewModelState = MutableLiveData<ViewModelState>()
     private val _geocodeError = MutableLiveData<GeocodeErrorTypes>()
 
     // getters
-    val currentProperty: LiveData<Property>
-        get() = _currentProperty
+
     val viewModelState: LiveData<ViewModelState>
         get() = _viewModelState
-    val coordinates: LiveData<LatLng>
-        get() = _coordinates
     val geocodeError: LiveData<GeocodeErrorTypes>
         get() = _geocodeError
 

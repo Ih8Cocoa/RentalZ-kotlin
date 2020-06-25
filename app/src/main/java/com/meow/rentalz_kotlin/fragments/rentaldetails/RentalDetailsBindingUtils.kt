@@ -8,11 +8,13 @@ import com.meow.rentalz_kotlin.database.Property
 
 object RentalDetailsBindingUtils {
     @BindingAdapter("shouldHideView")
-    fun TextView.shouldHideView(data: String) {
-        visibility = if (data.isBlank()) View.VISIBLE else View.GONE
+    @JvmStatic
+    fun TextView.shouldHideView(data: String?) {
+        visibility = if (data?.isBlank() == true) View.VISIBLE else View.GONE
     }
 
     @BindingAdapter("disableModifyButton")
+    @JvmStatic
     fun Button.disableModifyButtonIfNull(p: Property?) {
         isEnabled = p != null
     }

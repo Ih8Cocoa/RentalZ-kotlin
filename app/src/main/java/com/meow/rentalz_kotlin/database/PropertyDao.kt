@@ -22,7 +22,7 @@ interface PropertyDao {
     fun allProperties(): LiveData<List<Property>>
 
     @Query("select *, rowid from property_table where rowid = :id")
-    suspend fun findPropertyById(id: Long): Property
+    fun findPropertyById(id: Long): LiveData<Property>
 
     @Query("SELECT *, rowid FROM property_table WHERE property_table MATCH :query order by rowid desc")
     fun searchProperties(query: String): Flow<Property>

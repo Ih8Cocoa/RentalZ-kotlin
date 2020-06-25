@@ -27,7 +27,9 @@ abstract class RentalDatabase : RoomDatabase() {
                     context.applicationContext,
                     RentalDatabase::class.java,
                     "property_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = newInstance
                 return newInstance
             }

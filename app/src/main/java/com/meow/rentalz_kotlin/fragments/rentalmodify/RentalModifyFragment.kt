@@ -43,6 +43,8 @@ class RentalModifyFragment : Fragment() {
         binding.editDate.setOnFocusChangeListener(::datePickerFocusChangeListener)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        attachObservers()
+
         return binding.root
     }
 
@@ -50,6 +52,7 @@ class RentalModifyFragment : Fragment() {
         viewModel.buttonState.observe(viewLifecycleOwner, ::buttonStateObservers)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun datePickerFocusChangeListener(view: View, hasFocus: Boolean) {
         if (!hasFocus) return
         val context = requireContext()
@@ -64,6 +67,7 @@ class RentalModifyFragment : Fragment() {
             .show()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun datePickerListener(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
         val date = LocalDate.of(year, month + 1, dayOfMonth).format(Utils.DATE_TIME_FORMATTER)
         viewModel.creationDate.value = date
@@ -72,9 +76,8 @@ class RentalModifyFragment : Fragment() {
     private fun buttonStateObservers(state: ButtonState?) {
         if (state == null) return
         activity.hideSoftKeyboard()
-        val navController = findNavController()
         when (state) {
-            ButtonState.BACK, ButtonState.EDIT -> navController.navigateUp()
+            ButtonState.BACK, ButtonState.EDIT -> findNavController().navigateUp()
             ButtonState.DELETE_BUTTON_CLICKED -> {
                 val activity = requireActivity()
                 AlertDialog.Builder(activity)
@@ -91,7 +94,7 @@ class RentalModifyFragment : Fragment() {
             ButtonState.DELETION_COMPLETED -> {
                 val backHome = RentalModifyFragmentDirections
                     .actionRentalModifyFragmentToRentalListFragment()
-                navController.navigate(backHome)
+                findNavController().navigate(backHome)
             }
         }
         viewModel.resetButtonState()

@@ -7,6 +7,7 @@ import timber.log.Timber
 
 object RentalAddBindingUtils {
     @BindingAdapter("propertyTypeValidation")
+    @JvmStatic
     fun TextInputLayout.validatePropertyType(errorType: ErrorType) {
         val errorMessage = when(errorType) {
             ErrorType.NONE -> null
@@ -21,6 +22,7 @@ object RentalAddBindingUtils {
     }
 
     @BindingAdapter("bedroomTypeValidation")
+    @JvmStatic
     fun TextInputLayout.validateBedroomType(errorType: ErrorType) {
         val errorMessage = when(errorType) {
             ErrorType.NONE -> null
@@ -35,6 +37,7 @@ object RentalAddBindingUtils {
     }
 
     @BindingAdapter("priceValidation")
+    @JvmStatic
     fun TextInputLayout.validatePrice(errorType: ErrorType) {
         val errorMessage = when(errorType) {
             ErrorType.NONE -> null
@@ -46,6 +49,7 @@ object RentalAddBindingUtils {
     }
 
     @BindingAdapter("dateValidation")
+    @JvmStatic
     fun TextInputLayout.validateLocalDate(errorType: ErrorType) {
         val errorMessage = when(errorType) {
             ErrorType.NONE -> null
@@ -60,6 +64,7 @@ object RentalAddBindingUtils {
     }
 
     @BindingAdapter("reporterNameValidation")
+    @JvmStatic
     fun TextInputLayout.validateReporterName(errorType: ErrorType) {
         val errorMessage = when(errorType) {
             ErrorType.NONE -> null

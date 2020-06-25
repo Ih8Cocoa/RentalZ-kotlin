@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-import com.meow.rentalz_kotlin.R
 import com.meow.rentalz_kotlin.database.RentalDatabase
 import com.meow.rentalz_kotlin.databinding.FragmentRentalDetailsBinding
 
@@ -20,12 +19,11 @@ import com.meow.rentalz_kotlin.databinding.FragmentRentalDetailsBinding
  */
 class RentalDetailsFragment : Fragment() {
     private val viewModel: RentalDetailsViewModel by viewModels {
+        val args: RentalDetailsFragmentArgs by navArgs()
         val applicationContext = requireContext().applicationContext
-        val bundle = requireArguments()
-        val propertyId = 1L
         val dao = RentalDatabase.getDatabase(applicationContext).propertyDao
         val geoCoder = Geocoder(context)
-        RentalDetailsViewModelFactory(dao, propertyId, geoCoder)
+        RentalDetailsViewModelFactory(dao, args.id, geoCoder)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

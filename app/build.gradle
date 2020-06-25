@@ -18,6 +18,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary true
+
+        // Incremental compilation with KAPT
+        kapt {
+            arguments {
+                arg("room.incremental", "true")
+            }
+        }
     }
 
     buildFeatures {

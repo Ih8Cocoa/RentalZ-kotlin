@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.meow.rentalz_kotlin.fragments.rentalconfirm.RentalConfirmViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".rentalconfirm.RentalConfirmFragment">
+
+        <TextView
+            android:id="@+id/confirm_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/hint_confirm"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_label">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/property_type_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_property_type"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/bedroom_type_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/property_type_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.property.propertyType}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/property_type_lbl"
+                    app:layout_constraintTop_toTopOf="@+id/property_type_lbl"
+                    tools:text="Cat Girl House" />
+
+                <TextView
+                    android:id="@+id/bedroom_type_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_bedroom_type"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/built_date_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_type_lbl" />
+
+                <TextView
+                    android:id="@+id/built_date_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_time"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/address_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bedroom_type_lbl" />
+
+                <TextView
+                    android:id="@+id/address_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_address"
+                    android:textStyle="bold"
+                    app:shouldHideView="@{viewModel.property.address}"
+                    app:layout_constraintBottom_toTopOf="@+id/price_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/built_date_lbl" />
+
+                <TextView
+                    android:id="@+id/price_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_price"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/furniture_type_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/address_lbl" />
+
+                <TextView
+                    android:id="@+id/furniture_type_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_furniture_type"
+                    android:textStyle="bold"
+                    app:shouldHideView="@{viewModel.property.furnitureType}"
+                    app:layout_constraintBottom_toTopOf="@+id/reporter_name_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price_lbl" />
+
+                <TextView
+                    android:id="@+id/reporter_name_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_reporter_name"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/notes_lbl"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/furniture_type_lbl" />
+
+                <TextView
+                    android:id="@+id/notes_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/hint_notes"
+                    android:textStyle="bold"
+                    app:shouldHideView="@{viewModel.property.notes}"
+                    app:layout_constraintBottom_toTopOf="@+id/notes_txt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reporter_name_lbl" />
+
+                <TextView
+                    android:id="@+id/notes_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{viewModel.property.notes}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/notes_lbl"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+                <TextView
+                    android:id="@+id/bedroom_type_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.property.bedroomType}"
+                    app:layout_constraintBottom_toBottomOf="@+id/bedroom_type_lbl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bedroom_type_lbl"
+                    tools:text="Twin Bed" />
+
+                <TextView
+                    android:id="@+id/date_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.property.creationDate.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/built_date_lbl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/built_date_lbl"
+                    tools:text="Spooktober" />
+
+                <TextView
+                    android:id="@+id/address_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.property.address}"
+                    app:shouldHideView="@{viewModel.property.address}"
+                    app:layout_constraintBottom_toBottomOf="@+id/address_lbl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/address_lbl"
+                    tools:text="Unknown" />
+
+                <TextView
+                    android:id="@+id/price_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{`$` + viewModel.property.monthlyPrice.toPlainString()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/price_lbl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/price_lbl"
+                    tools:text="$399" />
+
+                <TextView
+                    android:id="@+id/furniture_type_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.property.furnitureType}"
+                    app:shouldHideView="@{viewModel.property.furnitureType}"
+                    app:layout_constraintBottom_toBottomOf="@+id/furniture_type_lbl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/furniture_type_lbl"
+                    tools:text="Brand New" />
+
+                <TextView
+                    android:id="@+id/reporter_name_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.property.reporterName}"
+                    app:layout_constraintBottom_toBottomOf="@+id/reporter_name_lbl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/reporter_name_lbl"
+                    tools:text="John" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> viewModel.onSubmitButtonClicked()}"
+            android:text="@string/hint_submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_back"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_back"
+            android:onClick="@{() -> viewModel.onBackButtonClicked()}"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_submit" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

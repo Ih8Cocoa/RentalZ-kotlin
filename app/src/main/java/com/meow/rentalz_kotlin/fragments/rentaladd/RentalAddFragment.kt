@@ -23,9 +23,7 @@ import java.time.LocalDate
  * create an instance of this fragment.
  */
 class RentalAddFragment : Fragment() {
-    private val viewModel: RentalAddViewModel by viewModels {
-        RentalAddViewModelFactory()
-    }
+    private val viewModel: RentalAddViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
